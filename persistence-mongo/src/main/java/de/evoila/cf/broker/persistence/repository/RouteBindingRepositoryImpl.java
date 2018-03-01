@@ -29,7 +29,7 @@ public class RouteBindingRepositoryImpl implements RouteBindingRepository {
 	 */
 	@Override
 	public String getRouteBindingId(String bindingId) {
-		return routeBindingRepository.findById(bindingId).get().getServiceInstanceId();
+		return routeBindingRepository.findOne(bindingId).getServiceInstanceId();
 	}
 
 	/*
@@ -52,7 +52,7 @@ public class RouteBindingRepositoryImpl implements RouteBindingRepository {
 	 */
 	@Override
 	public boolean containsRouteBindingId(String bindingId) {
-		return routeBindingRepository.existsById(bindingId);
+		return routeBindingRepository.exists(bindingId);
 	}
 
 	/*
@@ -64,11 +64,11 @@ public class RouteBindingRepositoryImpl implements RouteBindingRepository {
 	 */
 	@Override
 	public void deleteRouteBinding(String bindingId) {
-		routeBindingRepository.deleteById(bindingId);
+		routeBindingRepository.delete(bindingId);
 	}
 
 	@Override
 	public RouteBinding findOne(String bindingId) {
-		return routeBindingRepository.findById(bindingId).get();
+		return routeBindingRepository.findOne(bindingId);
 	}
 }

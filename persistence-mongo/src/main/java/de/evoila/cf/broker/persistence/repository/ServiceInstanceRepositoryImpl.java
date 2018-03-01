@@ -22,12 +22,12 @@ public class ServiceInstanceRepositoryImpl
 
 	@Override
 	public ServiceInstance getServiceInstance(String instanceId) {
-		return serviceInstanceRepository.findById(instanceId).get();
+		return serviceInstanceRepository.findOne(instanceId);
 	}
 
 	@Override
 	public boolean containsServiceInstanceId(String serviceInstanceId) {
-		return serviceInstanceRepository.existsById(serviceInstanceId);
+		return serviceInstanceRepository.exists(serviceInstanceId);
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class ServiceInstanceRepositoryImpl
 
 	@Override
 	public void deleteServiceInstance(String serviceInstanceId) {
-		serviceInstanceRepository.deleteById(serviceInstanceId);
+		serviceInstanceRepository.delete(serviceInstanceId);
 	}
 
 }

@@ -31,7 +31,7 @@ public class BindingRepositoryImpl implements BindingRepository {
 	 */
 	@Override
 	public String getInternalBindingId(String bindingId) {
-		return bindingRepository.findById(bindingId).get().getServiceInstanceId();
+		return bindingRepository.findOne(bindingId).getServiceInstanceId();
 	}
 
 	/*
@@ -54,7 +54,7 @@ public class BindingRepositoryImpl implements BindingRepository {
 	 */
 	@Override
 	public boolean containsInternalBindingId(String bindingId) {
-		return bindingRepository.existsById(bindingId);
+		return bindingRepository.exists(bindingId);
 	}
 
 	/*
@@ -66,12 +66,12 @@ public class BindingRepositoryImpl implements BindingRepository {
 	 */
 	@Override
 	public void deleteBinding(String bindingId) {
-		bindingRepository.deleteById(bindingId);
+		bindingRepository.delete(bindingId);
 	}
 
 	@Override
 	public ServiceInstanceBinding findOne(String bindingId) {
-		ServiceInstanceBinding findOne = bindingRepository.findById(bindingId).get();
+		ServiceInstanceBinding findOne = bindingRepository.findOne(bindingId);
 		return findOne;
 	}
 
