@@ -8,6 +8,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  *
  */
 @ConditionalOnProperty(prefix = "openstack", name = { "endpoint" }, havingValue = "")
-public interface StackMappingRepository extends MongoRepository<ServiceStackMapping, String> {
+public interface ClusterStackMappingRepository extends MongoRepository<ClusterStackMapping, String> {
 
 }
