@@ -16,8 +16,7 @@ import de.evoila.cf.broker.repository.ServiceInstanceRepository;
  *
  */
 @Service
-public class ServiceInstanceRepositoryImpl
-		implements ServiceInstanceRepository {
+public class ServiceInstanceRepositoryImpl implements ServiceInstanceRepository {
 	
 	@Autowired
 	de.evoila.cf.broker.persistence.mongodb.repository.ServiceInstanceRepository serviceInstanceRepository;
@@ -48,12 +47,10 @@ public class ServiceInstanceRepositoryImpl
 		serviceInstanceRepository.delete(serviceInstanceId);
 	}
 
-
 	@Override
 	public void updateServiceInstancePlan(ServiceInstance serviceInstance){
 		serviceInstanceRepository.save(serviceInstance);
 
 	}
-
 
 }
