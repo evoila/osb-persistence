@@ -1,71 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-	
-	<modelVersion>4.0.0</modelVersion>
-	<artifactId>persistence-parent</artifactId>
-	<packaging>pom</packaging>
-	<name>persistence-parent</name>
-	<version>1.2.0</version>
-<<<<<<< HEAD
+    <artifactId>persistence-mongodb</artifactId>
+    <packaging>jar</packaging>
+    <name>persistence-mongodb</name>
+    <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>de.evoila.cf.broker</groupId>
-        <artifactId>repo-parent</artifactId>
+        <artifactId>persistence-parent</artifactId>
         <relativePath>../</relativePath>
         <version>1.2.0</version>
     </parent>
 
-    <modules>
-=======
-	
-	<parent>
-		<groupId>de.evoila.cf.broker</groupId>
-		<artifactId>parent</artifactId>
-		<version>1.2.0</version>
-		<relativePath>../osb-core/</relativePath>
+    <properties>
+        <persistence.version>1.2.0</persistence.version>
+    </properties>
 
-	</parent>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
 
-	<modules>
->>>>>>> 2a819ad6767177e0bf1b1d303edd4bae509e717b
-		<module>persistence-mongo</module>
-	</modules>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        </dependency>
 
-	<properties>
-<<<<<<< HEAD
-=======
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<org.springframework.boot>1.5.2.RELEASE</org.springframework.boot>
-		<java.version>9</java.version>
->>>>>>> 2a819ad6767177e0bf1b1d303edd4bae509e717b
-		<persistence.version>1.2.0</persistence.version>
-		<parent.version>1.2.0</parent.version>
-	</properties>
-	<dependencyManagement>
-		<dependencies>
-<<<<<<< HEAD
-            <dependency>
-=======
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-starter-data-redis</artifactId>
-				<version>${org.springframework.boot}</version>
-			</dependency>
+        <dependency>
+            <groupId>de.evoila.cf.broker</groupId>
+            <artifactId>core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>de.evoila.cf.broker</groupId>
+            <artifactId>model</artifactId>
+        </dependency>
+    </dependencies>
 
-			<dependency>
->>>>>>> 2a819ad6767177e0bf1b1d303edd4bae509e717b
-				<groupId>de.evoila.cf.broker</groupId>
-				<artifactId>core</artifactId>
-				<version>${parent.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>de.evoila.cf.broker</groupId>
-				<artifactId>model</artifactId>
-				<version>${parent.version}</version>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
+
 </project>
