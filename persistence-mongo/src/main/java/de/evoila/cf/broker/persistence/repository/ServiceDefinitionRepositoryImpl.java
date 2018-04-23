@@ -51,19 +51,12 @@ public class ServiceDefinitionRepositoryImpl implements ServiceDefinitionReposit
 	@Override
 	public void validateServiceId(String serviceDefinitionId) throws ServiceDefinitionDoesNotExistException {
 		for(ServiceDefinition serviceDefinition : catalog.getServices()) {
-<<<<<<< HEAD
 			if (serviceDefinitionId.equals(serviceDefinition.getId())) {
 				return;
 			}
 		}
 
 		throw new ServiceDefinitionDoesNotExistException(serviceDefinitionId);
-=======
-			if (!serviceDefinitionId.equals(serviceDefinition.getId())) {
-				throw new ServiceDefinitionDoesNotExistException(serviceDefinitionId);
-			}
-		}
->>>>>>> 2a819ad6767177e0bf1b1d303edd4bae509e717b
 	}
 
 	// Depl + Bind
