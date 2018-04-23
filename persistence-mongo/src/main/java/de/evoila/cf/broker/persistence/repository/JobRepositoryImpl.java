@@ -18,7 +18,7 @@ import de.evoila.cf.broker.repository.JobRepository;
 public class JobRepositoryImpl implements JobRepository {
 	
 	@Autowired
-	JobProgressRepository jobProgessRepository;
+	JobProgressRepository jobProgressRepository;
 	
 
 	/* (non-Javadoc)
@@ -26,7 +26,7 @@ public class JobRepositoryImpl implements JobRepository {
 	 */
 	@Override
 	public JobProgress getJobProgress(String serviceInstanceId) {
-		return jobProgessRepository.findOne(serviceInstanceId);
+		return jobProgressRepository.findOne(serviceInstanceId);
 	}
 
 	/* (non-Javadoc)
@@ -35,7 +35,7 @@ public class JobRepositoryImpl implements JobRepository {
 	@Override
 	public void saveOrUpdateJobProgress(String serviceInstanceId, String progress) {
 		JobProgress jobProgress = new JobProgress(serviceInstanceId, progress);
-        jobProgessRepository.save(jobProgress);
+        jobProgressRepository.save(jobProgress);
 	}
 
 	/* (non-Javadoc)
@@ -43,7 +43,7 @@ public class JobRepositoryImpl implements JobRepository {
 	 */
 	@Override
 	public boolean containsJobProgress(String serviceInstanceId) {
-		return jobProgessRepository.exists(serviceInstanceId);
+		return jobProgressRepository.exists(serviceInstanceId);
 	}
 
 	/* (non-Javadoc)
@@ -51,7 +51,7 @@ public class JobRepositoryImpl implements JobRepository {
 	 */
 	@Override
 	public void deleteJobProgress(String serviceInstanceId) {
-        jobProgessRepository.delete(serviceInstanceId);
+        jobProgressRepository.delete(serviceInstanceId);
 	}
 
 }
