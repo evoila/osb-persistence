@@ -16,7 +16,7 @@ import de.evoila.cf.broker.model.ServiceDefinition;
 import de.evoila.cf.broker.repository.ServiceDefinitionRepository;
 
 /**
- * @author Christian Brinker, evoila.
+ * @author Christian Brinker & Johannes Hiemer, evoila.
  *
  */
 @Repository
@@ -25,13 +25,6 @@ public class ServiceDefinitionRepositoryImpl implements ServiceDefinitionReposit
 	@Autowired
 	private Catalog catalog;
 
-	// Depl
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see de.evoila.cf.broker.service.impl.ServiceDefinitionRepository#
-	 * getServiceDefinition()
-	 */
 	@Override
 	public List<ServiceDefinition> getServiceDefinition() {
 		return catalog.getServices();
@@ -41,13 +34,6 @@ public class ServiceDefinitionRepositoryImpl implements ServiceDefinitionReposit
 	// return serviceInstances;
 	// }
 
-	// Depl
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see de.evoila.cf.broker.service.impl.ServiceDefinitionRepository#
-	 * validateServiceId(java.lang.String)
-	 */
 	@Override
 	public void validateServiceId(String serviceDefinitionId) throws ServiceDefinitionDoesNotExistException {
 		for(ServiceDefinition serviceDefinition : catalog.getServices()) {
@@ -59,16 +45,8 @@ public class ServiceDefinitionRepositoryImpl implements ServiceDefinitionReposit
 		throw new ServiceDefinitionDoesNotExistException(serviceDefinitionId);
 	}
 
-	// Depl + Bind
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * de.evoila.cf.broker.service.impl.ServiceDefinitionRepository#getPlan(java
-	 * .lang.String)
-	 */
 	@Override
-	public Plan getPlan(String planId) throws ServiceBrokerException {
+	public Plan getPlan(String planId) throws ServiceDefinitionDoesNotExistException {
 		for(ServiceDefinition serviceDefinition : catalog.getServices()) {
 			for (Plan currentPlan : serviceDefinition.getPlans()) {
 				if (currentPlan.getId().equals(planId)) {
@@ -76,7 +54,7 @@ public class ServiceDefinitionRepositoryImpl implements ServiceDefinitionReposit
 				}
 			}
 		}
-		throw new ServiceBrokerException("Missing plan for id: " + planId);
+		throw new ServiceDefinitionDoesNotExistException("Missing plan for id: " + planId);
 	}
 
 }
