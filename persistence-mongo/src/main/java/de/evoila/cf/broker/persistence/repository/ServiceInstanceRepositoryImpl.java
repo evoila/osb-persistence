@@ -48,7 +48,7 @@ public class ServiceInstanceRepositoryImpl implements ServiceInstanceRepository 
 	}
 
 	@Override
-	public void updateServiceInstancePlan(ServiceInstance serviceInstance){
+	public void updateServiceInstance(ServiceInstance serviceInstance){
 		serviceInstanceRepository.save(serviceInstance);
 
 	}
