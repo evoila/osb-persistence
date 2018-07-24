@@ -65,7 +65,7 @@ public class BindingRepositoryImpl implements BindingRepository {
 	 * String)
 	 */
 	@Override
-	public void deleteBinding(String bindingId) {
+	public void unbindService(String bindingId) {
 		bindingRepository.delete(bindingId);
 	}
 
