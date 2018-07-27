@@ -26,7 +26,7 @@ public class JobRepositoryImpl implements JobRepository {
 	 */
 	@Override
 	public JobProgress getJobProgress(String serviceInstanceId) {
-		return jobProgressRepository.findOne(serviceInstanceId);
+		return jobProgressRepository.findById(serviceInstanceId).get();
 	}
 
 	/* (non-Javadoc)
@@ -43,7 +43,7 @@ public class JobRepositoryImpl implements JobRepository {
 	 */
 	@Override
 	public boolean containsJobProgress(String serviceInstanceId) {
-		return jobProgressRepository.exists(serviceInstanceId);
+		return jobProgressRepository.existsById(serviceInstanceId);
 	}
 
 	/* (non-Javadoc)
@@ -51,7 +51,7 @@ public class JobRepositoryImpl implements JobRepository {
 	 */
 	@Override
 	public void deleteJobProgress(String serviceInstanceId) {
-        jobProgressRepository.delete(serviceInstanceId);
+        jobProgressRepository.deleteById(serviceInstanceId);
 	}
 
 }
