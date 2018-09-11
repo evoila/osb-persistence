@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 import de.evoila.cf.broker.model.ServiceInstance;
 import de.evoila.cf.broker.repository.ServiceInstanceRepository;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * @author Patrick Weber, evoila.
@@ -24,6 +27,19 @@ public class ServiceInstanceRepositoryImpl implements ServiceInstanceRepository 
 	@Override
 	public ServiceInstance getServiceInstance(String instanceId) {
 		return serviceInstanceRepository.findById(instanceId).get();
+	}
+
+	@Override
+	public List<ServiceInstance> getServiceInstancesByServiceDefinitionId(String serviceDefinitionId) {
+		List<ServiceInstance> serviceInstances = new ArrayList<>();
+
+		serviceInstanceRepository.findAll().forEach(serviceInstance -> {
+			if(serviceInstance.getServiceDefinitionId() != null && serviceInstance.getServiceDefinitionId().equals(serviceDefinitionId)) {
+				serviceInstances.add(serviceInstance);
+			}
+		});
+
+		return serviceInstances;
 	}
 
 	@Override
