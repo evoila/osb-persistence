@@ -3,11 +3,11 @@
  */
 package de.evoila.cf.broker.persistence.mongodb.repository;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import de.evoila.cf.broker.model.BaseEntity;
 import de.evoila.cf.broker.model.ServerAddress;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Christian Mueller, evoila

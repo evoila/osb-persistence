@@ -1,9 +1,8 @@
 package de.evoila.cf.broker.bean.impl;
 
+import de.evoila.cf.broker.bean.DataMongoDBBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Service;
-
-import de.evoila.cf.broker.bean.DataMongoDBBean;
 
 @Service
 @ConfigurationProperties(prefix="data.mongodb")
