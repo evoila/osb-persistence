@@ -3,12 +3,10 @@
  */
 package de.evoila.cf.broker.persistence.repository;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import de.evoila.cf.broker.model.JobProgress;
 import de.evoila.cf.broker.persistence.mongodb.repository.JobProgressRepository;
 import de.evoila.cf.broker.repository.JobRepository;
+import org.springframework.stereotype.Service;
 
 /**
  * @author Patrick Weber, evoila.
@@ -16,10 +14,12 @@ import de.evoila.cf.broker.repository.JobRepository;
  */
 @Service
 public class JobRepositoryImpl implements JobRepository {
-	
-	@Autowired
+
 	JobProgressRepository jobProgressRepository;
-	
+
+	public JobRepositoryImpl(JobProgressRepository jobProgressRepository) {
+		this.jobProgressRepository = jobProgressRepository;
+	}
 
 	/* (non-Javadoc)
 	 * @see de.evoila.cf.broker.persistence.repository.JobRepository#getJobProgress(java.lang.String)

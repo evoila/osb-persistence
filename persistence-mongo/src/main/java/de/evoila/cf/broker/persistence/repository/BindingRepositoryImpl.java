@@ -7,7 +7,6 @@ package de.evoila.cf.broker.persistence.repository;
 import de.evoila.cf.broker.model.ServiceInstanceBinding;
 import de.evoila.cf.broker.persistence.mongodb.repository.MongoDBBindingRepository;
 import de.evoila.cf.broker.repository.BindingRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,8 +18,11 @@ import java.util.List;
 @Service
 public class BindingRepositoryImpl implements BindingRepository {
 
-	@Autowired
 	private MongoDBBindingRepository bindingRepository;
+
+	public BindingRepositoryImpl(MongoDBBindingRepository bindingRepository) {
+		this.bindingRepository = bindingRepository;
+	}
 
 	/*
 	 * (non-Javadoc)
