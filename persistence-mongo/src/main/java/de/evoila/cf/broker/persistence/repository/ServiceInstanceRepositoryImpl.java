@@ -5,6 +5,7 @@ package de.evoila.cf.broker.persistence.repository;
 
 import de.evoila.cf.broker.model.ServiceInstance;
 import de.evoila.cf.broker.repository.ServiceInstanceRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,11 +20,8 @@ import java.util.List;
 @Service
 public class ServiceInstanceRepositoryImpl implements ServiceInstanceRepository {
 
+	@Autowired
 	de.evoila.cf.broker.persistence.mongodb.repository.ServiceInstanceRepository serviceInstanceRepository;
-
-	public ServiceInstanceRepositoryImpl(de.evoila.cf.broker.persistence.mongodb.repository.ServiceInstanceRepository serviceInstanceRepository) {
-		this.serviceInstanceRepository = serviceInstanceRepository;
-	}
 
 	@Override
 	public ServiceInstance getServiceInstance(String instanceId) {

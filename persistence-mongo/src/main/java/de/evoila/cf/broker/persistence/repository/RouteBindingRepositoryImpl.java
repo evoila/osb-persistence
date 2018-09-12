@@ -5,6 +5,7 @@ package de.evoila.cf.broker.persistence.repository;
 
 import de.evoila.cf.broker.model.RouteBinding;
 import de.evoila.cf.broker.repository.RouteBindingRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,11 +15,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class RouteBindingRepositoryImpl implements RouteBindingRepository {
 
+	@Autowired
 	de.evoila.cf.broker.persistence.mongodb.repository.RouteBindingRepository routeBindingRepository;
-
-	public RouteBindingRepositoryImpl(de.evoila.cf.broker.persistence.mongodb.repository.RouteBindingRepository routeBindingRepository) {
-		this.routeBindingRepository = routeBindingRepository;
-	}
 	
 	/*
 	 * (non-Javadoc)
