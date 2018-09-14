@@ -8,7 +8,6 @@ import de.evoila.cf.broker.model.Plan;
 import de.evoila.cf.broker.model.ServiceDefinition;
 import de.evoila.cf.broker.repository.ServiceDefinitionRepository;
 import de.evoila.cf.broker.service.CatalogService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -20,8 +19,11 @@ import java.util.List;
 @Repository
 public class ServiceDefinitionRepositoryImpl implements ServiceDefinitionRepository {
 
-	@Autowired
 	private CatalogService catalogService;
+
+	public ServiceDefinitionRepositoryImpl(CatalogService catalogService) {
+		this.catalogService = catalogService;
+	}
 
 	@Override
 	public List<ServiceDefinition> getServiceDefinition() {
