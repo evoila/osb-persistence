@@ -3,9 +3,8 @@
  */
 package de.evoila.cf.broker.persistence.mongodb.repository;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
-
 import de.evoila.cf.broker.model.JobProgress;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
  * @author Christian Brinker, evoila.

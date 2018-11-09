@@ -3,15 +3,14 @@
  */
 package de.evoila.cf.broker.persistence.repository;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
-import org.springframework.beans.factory.BeanCreationException;
-import org.springframework.stereotype.Repository;
-
 import de.evoila.cf.broker.model.Platform;
 import de.evoila.cf.broker.repository.PlatformRepository;
 import de.evoila.cf.broker.service.PlatformService;
+import org.springframework.beans.factory.BeanCreationException;
+import org.springframework.stereotype.Repository;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author Christian Brinker, evoila.

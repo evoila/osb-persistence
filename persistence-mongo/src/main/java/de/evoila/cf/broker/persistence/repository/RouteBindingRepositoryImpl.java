@@ -3,11 +3,10 @@
  */
 package de.evoila.cf.broker.persistence.repository;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import de.evoila.cf.broker.model.RouteBinding;
 import de.evoila.cf.broker.repository.RouteBindingRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * @author Patrick Weber, evoila.
@@ -15,7 +14,6 @@ import de.evoila.cf.broker.repository.RouteBindingRepository;
  */
 @Service
 public class RouteBindingRepositoryImpl implements RouteBindingRepository {
-
 
 	@Autowired
 	de.evoila.cf.broker.persistence.mongodb.repository.RouteBindingRepository routeBindingRepository;
@@ -29,7 +27,7 @@ public class RouteBindingRepositoryImpl implements RouteBindingRepository {
 	 */
 	@Override
 	public String getRouteBindingId(String bindingId) {
-		return routeBindingRepository.findOne(bindingId).getServiceInstanceId();
+		return routeBindingRepository.findById(bindingId).get().getServiceInstanceId();
 	}
 
 	/*
@@ -52,7 +50,7 @@ public class RouteBindingRepositoryImpl implements RouteBindingRepository {
 	 */
 	@Override
 	public boolean containsRouteBindingId(String bindingId) {
-		return routeBindingRepository.exists(bindingId);
+		return routeBindingRepository.existsById(bindingId);
 	}
 
 	/*
@@ -64,11 +62,11 @@ public class RouteBindingRepositoryImpl implements RouteBindingRepository {
 	 */
 	@Override
 	public void deleteRouteBinding(String bindingId) {
-		routeBindingRepository.delete(bindingId);
+		routeBindingRepository.deleteById(bindingId);
 	}
 
 	@Override
 	public RouteBinding findOne(String bindingId) {
-		return routeBindingRepository.findOne(bindingId);
+		return routeBindingRepository.findById(bindingId).get();
 	}
 }

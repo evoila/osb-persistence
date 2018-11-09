@@ -3,78 +3,58 @@
  */
 package de.evoila.cf.broker.persistence.repository;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-
-import de.evoila.cf.broker.exception.ServiceBrokerException;
 import de.evoila.cf.broker.exception.ServiceDefinitionDoesNotExistException;
-import de.evoila.cf.broker.model.Catalog;
 import de.evoila.cf.broker.model.Plan;
 import de.evoila.cf.broker.model.ServiceDefinition;
 import de.evoila.cf.broker.repository.ServiceDefinitionRepository;
+import de.evoila.cf.broker.service.CatalogService;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
- * @author Christian Brinker, evoila.
+ * @author Christian Brinker & Johannes Hiemer, evoila.
  *
  */
 @Repository
 public class ServiceDefinitionRepositoryImpl implements ServiceDefinitionRepository {
 
-	@Autowired
-	private Catalog catalog;
+	private CatalogService catalogService;
 
-	// Depl
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see de.evoila.cf.broker.service.impl.ServiceDefinitionRepository#
-	 * getServiceDefinition()
-	 */
+	public ServiceDefinitionRepositoryImpl(CatalogService catalogService) {
+		this.catalogService = catalogService;
+	}
+
 	@Override
 	public List<ServiceDefinition> getServiceDefinition() {
-		return catalog.getServices();
+		return catalogService.getCatalog().getServices();
 	}
 
 	// public Map<String, ServiceInstance> getServiceInstances() {
 	// return serviceInstances;
 	// }
 
-	// Depl
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see de.evoila.cf.broker.service.impl.ServiceDefinitionRepository#
-	 * validateServiceId(java.lang.String)
-	 */
 	@Override
 	public void validateServiceId(String serviceDefinitionId) throws ServiceDefinitionDoesNotExistException {
-		for(ServiceDefinition serviceDefinition : catalog.getServices()) {
-			if (!serviceDefinitionId.equals(serviceDefinition.getId())) {
-				throw new ServiceDefinitionDoesNotExistException(serviceDefinitionId);
+		for(ServiceDefinition serviceDefinition : catalogService.getCatalog().getServices()) {
+			if (serviceDefinitionId.equals(serviceDefinition.getId())) {
+				return;
 			}
 		}
+
+		throw new ServiceDefinitionDoesNotExistException(serviceDefinitionId);
 	}
 
-	// Depl + Bind
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * de.evoila.cf.broker.service.impl.ServiceDefinitionRepository#getPlan(java
-	 * .lang.String)
-	 */
 	@Override
-	public Plan getPlan(String planId) throws ServiceBrokerException {
-		for(ServiceDefinition serviceDefinition : catalog.getServices()) {
+	public Plan getPlan(String planId) throws ServiceDefinitionDoesNotExistException {
+		for(ServiceDefinition serviceDefinition : catalogService.getCatalog().getServices()) {
 			for (Plan currentPlan : serviceDefinition.getPlans()) {
 				if (currentPlan.getId().equals(planId)) {
 					return currentPlan;
 				}
 			}
 		}
-		throw new ServiceBrokerException("Missing plan for id: " + planId);
+		throw new ServiceDefinitionDoesNotExistException("Missing plan for id: " + planId);
 	}
 
 }

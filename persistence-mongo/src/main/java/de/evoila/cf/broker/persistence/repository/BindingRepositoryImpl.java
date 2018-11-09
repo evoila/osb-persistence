@@ -7,7 +7,6 @@ package de.evoila.cf.broker.persistence.repository;
 import de.evoila.cf.broker.model.ServiceInstanceBinding;
 import de.evoila.cf.broker.persistence.mongodb.repository.MongoDBBindingRepository;
 import de.evoila.cf.broker.repository.BindingRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,8 +18,11 @@ import java.util.List;
 @Service
 public class BindingRepositoryImpl implements BindingRepository {
 
-	@Autowired
 	private MongoDBBindingRepository bindingRepository;
+
+	public BindingRepositoryImpl(MongoDBBindingRepository bindingRepository) {
+		this.bindingRepository = bindingRepository;
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -31,7 +33,7 @@ public class BindingRepositoryImpl implements BindingRepository {
 	 */
 	@Override
 	public String getInternalBindingId(String bindingId) {
-		return bindingRepository.findOne(bindingId).getServiceInstanceId();
+		return bindingRepository.findById(bindingId).get().getServiceInstanceId();
 	}
 
 	/*
@@ -54,7 +56,7 @@ public class BindingRepositoryImpl implements BindingRepository {
 	 */
 	@Override
 	public boolean containsInternalBindingId(String bindingId) {
-		return bindingRepository.exists(bindingId);
+		return bindingRepository.existsById(bindingId);
 	}
 
 	/*
@@ -65,13 +67,13 @@ public class BindingRepositoryImpl implements BindingRepository {
 	 * String)
 	 */
 	@Override
-	public void deleteBinding(String bindingId) {
-		bindingRepository.delete(bindingId);
+	public void unbindService(String bindingId) {
+		bindingRepository.deleteById(bindingId);
 	}
 
 	@Override
 	public ServiceInstanceBinding findOne(String bindingId) {
-		ServiceInstanceBinding findOne = bindingRepository.findOne(bindingId);
+		ServiceInstanceBinding findOne = bindingRepository.findById(bindingId).get();
 		return findOne;
 	}
 
