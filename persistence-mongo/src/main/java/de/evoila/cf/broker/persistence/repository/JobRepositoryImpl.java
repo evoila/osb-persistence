@@ -25,33 +25,39 @@ public class JobRepositoryImpl implements JobRepository {
 	 * @see de.evoila.cf.broker.persistence.repository.JobRepository#getJobProgress(java.lang.String)
 	 */
 	@Override
-	public JobProgress getJobProgress(String serviceInstanceId) {
-		return jobProgressRepository.findById(serviceInstanceId).get();
+	public JobProgress getJobProgress(String id) {
+		return jobProgressRepository.findById(id).get();
 	}
 
 	/* (non-Javadoc)
 	 * @see de.evoila.cf.broker.persistence.repository.JobRepository#saveOrUpdateJobProgress(java.lang.String, java.lang.String)
 	 */
 	@Override
-	public void saveOrUpdateJobProgress(String serviceInstanceId, String progress) {
-		JobProgress jobProgress = new JobProgress(serviceInstanceId, progress);
+	public void saveJobProgress(String id, String progress, String description, String operation) {
+		JobProgress jobProgress = new JobProgress(id, progress, description, operation);
         jobProgressRepository.save(jobProgress);
 	}
-
+	@Override
+	public void updateJobProgress(String id, String progress, String description) {
+		JobProgress jobProgress = jobProgressRepository.findById(id).get();
+		jobProgress.setState(progress);
+		jobProgress.setDescription(description);
+		jobProgressRepository.save(jobProgress);
+	}
 	/* (non-Javadoc)
 	 * @see de.evoila.cf.broker.persistence.repository.JobRepository#containsJobProgress(java.lang.String)
 	 */
 	@Override
-	public boolean containsJobProgress(String serviceInstanceId) {
-		return jobProgressRepository.existsById(serviceInstanceId);
+	public boolean containsJobProgress(String id) {
+		return jobProgressRepository.existsById(id);
 	}
 
 	/* (non-Javadoc)
 	 * @see de.evoila.cf.broker.persistence.repository.JobRepository#deleteJobProgress(java.lang.String)
 	 */
 	@Override
-	public void deleteJobProgress(String serviceInstanceId) {
-        jobProgressRepository.deleteById(serviceInstanceId);
+	public void deleteJobProgress(String id) {
+        jobProgressRepository.deleteById(id);
 	}
 
 }
