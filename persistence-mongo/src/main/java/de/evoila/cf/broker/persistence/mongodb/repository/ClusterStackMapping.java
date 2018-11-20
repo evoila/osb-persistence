@@ -4,7 +4,7 @@
 package de.evoila.cf.broker.persistence.mongodb.repository;
 
 import de.evoila.cf.broker.model.BaseEntity;
-import de.evoila.cf.broker.model.ServerAddress;
+import de.evoila.cf.broker.model.catalog.ServerAddress;
 
 import java.util.ArrayList;
 import java.util.List;
