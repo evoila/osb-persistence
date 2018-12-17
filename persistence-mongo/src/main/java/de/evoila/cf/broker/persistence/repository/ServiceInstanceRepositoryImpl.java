@@ -8,7 +8,6 @@ import de.evoila.cf.broker.repository.ServiceInstanceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -30,15 +29,7 @@ public class ServiceInstanceRepositoryImpl implements ServiceInstanceRepository 
 
 	@Override
 	public List<ServiceInstance> getServiceInstancesByServiceDefinitionId(String serviceDefinitionId) {
-		List<ServiceInstance> serviceInstances = new ArrayList<>();
-
-		serviceInstanceRepository.findAll().forEach(serviceInstance -> {
-			if(serviceInstance.getServiceDefinitionId() != null && serviceInstance.getServiceDefinitionId().equals(serviceDefinitionId)) {
-				serviceInstances.add(serviceInstance);
-			}
-		});
-
-		return serviceInstances;
+		return serviceInstanceRepository.findByServiceDefinitionId(serviceDefinitionId);
 	}
 
 	@Override

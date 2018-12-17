@@ -11,7 +11,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
  *
  */
 @Configuration
-@EnableMongoRepositories(basePackages="de.evoila.cf.broker.persistence.mongodb.repository")
+@EnableMongoRepositories(basePackages = {"de.evoila.cf.broker.persistence.mongodb.repository"})
 public class MongoDBConfiguration {
 
 }
