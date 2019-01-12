@@ -12,8 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * @author Patrick Weber, evoila.
- *
+ * @author Patrick Weber, Johannes Hiemer.
  */
 @Service
 public class BindingRepositoryImpl implements BindingRepository {
@@ -24,59 +23,54 @@ public class BindingRepositoryImpl implements BindingRepository {
 		this.bindingRepository = bindingRepository;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * de.evoila.cf.broker.repository.BindingRepository#getInternalBindingId(
-	 * java.lang.String)
-	 */
+    /**
+     * @param bindingId
+     * @return
+     */
 	@Override
 	public String getInternalBindingId(String bindingId) {
 		return bindingRepository.findById(bindingId).get().getServiceInstanceId();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * de.evoila.cf.broker.repository.BindingRepository#addInternalBinding(java.
-	 * lang.String, java.lang.String)
-	 */
+    /**
+     * @param binding
+     */
 	@Override
 	public void addInternalBinding(ServiceInstanceBinding binding) {
 		bindingRepository.save(binding);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see de.evoila.cf.broker.repository.BindingRepository#
-	 * containsInternalBindingId(java.lang.String)
-	 */
+    /**
+     * @param bindingId
+     * @return
+     */
 	@Override
 	public boolean containsInternalBindingId(String bindingId) {
 		return bindingRepository.existsById(bindingId);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * de.evoila.cf.broker.repository.BindingRepository#deleteBinding(java.lang.
-	 * String)
-	 */
+    /**
+     * @param bindingId
+     */
 	@Override
 	public void unbindService(String bindingId) {
 		bindingRepository.deleteById(bindingId);
 	}
 
+    /**
+     * @param bindingId
+     * @return
+     */
 	@Override
 	public ServiceInstanceBinding findOne(String bindingId) {
 		ServiceInstanceBinding findOne = bindingRepository.findById(bindingId).get();
 		return findOne;
 	}
 
+    /**
+     * @param serviceInstanceId
+     * @return
+     */
 	@Override
 	public List<ServiceInstanceBinding> getBindingsForServiceInstance (String serviceInstanceId) {
 		return bindingRepository.findByServiceInstanceId(serviceInstanceId);
