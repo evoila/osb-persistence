@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
 /**
  * @author Patrick Weber, evoila.
  * @author Marco Di Martino
@@ -24,7 +23,7 @@ public class ServiceInstanceRepositoryImpl implements ServiceInstanceRepository 
 
 	@Override
 	public ServiceInstance getServiceInstance(String instanceId) {
-		return serviceInstanceRepository.findById(instanceId).get();
+		return serviceInstanceRepository.findById(instanceId).orElse(null);
 	}
 
 	@Override
