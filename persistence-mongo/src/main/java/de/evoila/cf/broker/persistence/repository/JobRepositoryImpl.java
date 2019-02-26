@@ -1,10 +1,7 @@
-/**
- * 
- */
 package de.evoila.cf.broker.persistence.repository;
 
 import de.evoila.cf.broker.model.JobProgress;
-import de.evoila.cf.broker.persistence.mongodb.repository.JobProgressRepository;
+import de.evoila.cf.broker.persistence.mongodb.repository.MongoDBJobProgressRepository;
 import de.evoila.cf.broker.repository.JobRepository;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +11,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class JobRepositoryImpl implements JobRepository {
 
-	JobProgressRepository jobProgressRepository;
+	MongoDBJobProgressRepository jobProgressRepository;
 
-	public JobRepositoryImpl(JobProgressRepository jobProgressRepository) {
+	public JobRepositoryImpl(MongoDBJobProgressRepository jobProgressRepository) {
 		this.jobProgressRepository = jobProgressRepository;
 	}
 

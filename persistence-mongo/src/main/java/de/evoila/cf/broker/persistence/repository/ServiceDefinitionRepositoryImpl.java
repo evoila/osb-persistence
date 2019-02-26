@@ -1,6 +1,3 @@
-/**
- * 
- */
 package de.evoila.cf.broker.persistence.repository;
 
 import de.evoila.cf.broker.exception.ServiceDefinitionDoesNotExistException;
@@ -13,8 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * @author Christian Brinker & Johannes Hiemer, evoila.
- *
+ * @author Christian Brinker, Johannes Hiemer.
  */
 @Repository
 public class ServiceDefinitionRepositoryImpl implements ServiceDefinitionRepository {
@@ -22,17 +18,13 @@ public class ServiceDefinitionRepositoryImpl implements ServiceDefinitionReposit
 	private CatalogService catalogService;
 
 	public ServiceDefinitionRepositoryImpl(CatalogService catalogService) {
-		this.catalogService = catalogService;
+	    this.catalogService = catalogService;
 	}
 
 	@Override
 	public List<ServiceDefinition> getServiceDefinition() {
 		return catalogService.getCatalog().getServices();
 	}
-
-	// public Map<String, ServiceInstance> getServiceInstances() {
-	// return serviceInstances;
-	// }
 
 	@Override
 	public void validateServiceId(String serviceDefinitionId) throws ServiceDefinitionDoesNotExistException {

@@ -1,25 +1,23 @@
-/**
- * 
- */
 package de.evoila.cf.broker.persistence.repository;
 
 import de.evoila.cf.broker.model.ServiceInstance;
+import de.evoila.cf.broker.persistence.mongodb.repository.MongoDBServiceInstanceRepository;
 import de.evoila.cf.broker.repository.ServiceInstanceRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
- * @author Patrick Weber, evoila.
- * @author Marco Di Martino
- *
+ * @author Patrick Weber, Marco Di Martino.
  */
 @Service
 public class ServiceInstanceRepositoryImpl implements ServiceInstanceRepository {
 
-	@Autowired
-	de.evoila.cf.broker.persistence.mongodb.repository.ServiceInstanceRepository serviceInstanceRepository;
+    private MongoDBServiceInstanceRepository serviceInstanceRepository;
+
+    public ServiceInstanceRepositoryImpl(MongoDBServiceInstanceRepository mongoDBServiceInstanceRepository) {
+        this.serviceInstanceRepository = mongoDBServiceInstanceRepository;
+    }
 
 	@Override
 	public ServiceInstance getServiceInstance(String instanceId) {
