@@ -1,5 +1,6 @@
 package de.evoila.cf.broker.persistence.repository;
 
+import de.evoila.cf.broker.exception.ServiceInstanceDoesNotExistException;
 import de.evoila.cf.broker.model.ServiceInstance;
 import de.evoila.cf.broker.persistence.mongodb.repository.MongoDBServiceInstanceRepository;
 import de.evoila.cf.broker.repository.ServiceInstanceRepository;
@@ -20,8 +21,8 @@ public class ServiceInstanceRepositoryImpl implements ServiceInstanceRepository 
     }
 
 	@Override
-	public ServiceInstance getServiceInstance(String instanceId) {
-		return serviceInstanceRepository.findById(instanceId).orElse(null);
+	public ServiceInstance getServiceInstance(String instanceId) throws ServiceInstanceDoesNotExistException {
+		return serviceInstanceRepository.findById(instanceId).orElseThrow(() -> new ServiceInstanceDoesNotExistException(instanceId));
 	}
 
 	@Override
