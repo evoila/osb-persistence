@@ -7,6 +7,7 @@ import de.evoila.cf.broker.repository.ServiceInstanceRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Patrick Weber, Marco Di Martino.
@@ -20,10 +21,14 @@ public class ServiceInstanceRepositoryImpl implements ServiceInstanceRepository 
         this.serviceInstanceRepository = mongoDBServiceInstanceRepository;
     }
 
-	@Override
-	public ServiceInstance getServiceInstance(String instanceId) throws ServiceInstanceDoesNotExistException {
-		return serviceInstanceRepository.findById(instanceId).orElseThrow(() -> new ServiceInstanceDoesNotExistException(instanceId));
-	}
+    @Override
+    public ServiceInstance getServiceInstance(String instanceId) throws ServiceInstanceDoesNotExistException {
+        return getServiceInstanceOptional(instanceId).orElseThrow(() -> new ServiceInstanceDoesNotExistException(instanceId));
+    }
+
+    public Optional<ServiceInstance> getServiceInstanceOptional(String instanceId) {
+        return serviceInstanceRepository.findById(instanceId);
+    }
 
 	@Override
 	public List<ServiceInstance> getServiceInstancesByServiceDefinitionId(String serviceDefinitionId) {
