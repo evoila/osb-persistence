@@ -40,6 +40,10 @@ public class ServiceInstanceRepositoryImpl implements ServiceInstanceRepository 
 		return serviceInstanceRepository.existsById(serviceInstanceId);
 	}
 
+	/**
+	 * See {@linkplain ServiceInstanceRepository#addServiceInstance(String, ServiceInstance)}
+	 */
+	@Deprecated()
 	@Override
 	public void addServiceInstance(String id, ServiceInstance serviceInstance) {
 		if (!id.equals(serviceInstance.getId())) {
@@ -49,6 +53,11 @@ public class ServiceInstanceRepositoryImpl implements ServiceInstanceRepository 
 					serviceInstance.getInternalId());
 		}
 		serviceInstanceRepository.save(serviceInstance);
+	}
+
+	@Override
+	public void saveServiceInstance(ServiceInstance serviceInstance) {
+    	serviceInstanceRepository.save(serviceInstance);
 	}
 
 	@Override
