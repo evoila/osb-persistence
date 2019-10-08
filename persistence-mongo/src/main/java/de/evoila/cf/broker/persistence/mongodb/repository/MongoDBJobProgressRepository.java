@@ -11,4 +11,6 @@ import java.util.Optional;
 public interface MongoDBJobProgressRepository extends MongoRepository<JobProgress, String> {
 
     Optional<JobProgress> findFirstByReferenceIdOrderByDateDesc(String referenceId);
+
+    void deleteByReferenceId(String referenceId);
 }
