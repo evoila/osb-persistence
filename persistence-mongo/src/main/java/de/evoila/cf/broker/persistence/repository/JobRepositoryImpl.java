@@ -55,4 +55,8 @@ public class JobRepositoryImpl implements JobRepository {
         jobProgressRepository.deleteById(id);
 	}
 
+	@Override
+	public void deleteJobProgressByReferenceId(String referenceId) {
+		jobProgressRepository.deleteByReferenceId(referenceId);
+	}
 }
