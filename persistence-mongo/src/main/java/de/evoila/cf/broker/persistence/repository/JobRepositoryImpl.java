@@ -3,6 +3,7 @@ package de.evoila.cf.broker.persistence.repository;
 import de.evoila.cf.broker.model.JobProgress;
 import de.evoila.cf.broker.persistence.mongodb.repository.MongoDBJobProgressRepository;
 import de.evoila.cf.broker.repository.JobRepository;
+import org.bouncycastle.x509.NoSuchStoreException;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
@@ -31,7 +32,7 @@ public class JobRepositoryImpl implements JobRepository {
 
 	@Override
 	public JobProgress saveJobProgress(String id, String referenceId, String progress, String description, String operation) {
-        JobProgress jobProgress = jobProgressRepository.findById(id).orElseThrow(NoSuchElementException::new);
+        JobProgress jobProgress = new JobProgress(id, referenceId, progress, description, operation);
         jobProgressRepository.save(jobProgress);
 
         return jobProgress;
@@ -39,7 +40,7 @@ public class JobRepositoryImpl implements JobRepository {
 
 	@Override
 	public JobProgress updateJobProgress(String id, String progress, String description) {
-		JobProgress jobProgress = jobProgressRepository.findById(id).get();
+		JobProgress jobProgress = jobProgressRepository.findById(id).orElseThrow(NoSuchElementException::new);
 		jobProgress.setState(progress);
 		jobProgress.setDescription(description);
 		jobProgressRepository.save(jobProgress);
