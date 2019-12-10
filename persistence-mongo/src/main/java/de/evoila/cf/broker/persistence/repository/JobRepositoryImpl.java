@@ -3,7 +3,6 @@ package de.evoila.cf.broker.persistence.repository;
 import de.evoila.cf.broker.model.JobProgress;
 import de.evoila.cf.broker.persistence.mongodb.repository.MongoDBJobProgressRepository;
 import de.evoila.cf.broker.repository.JobRepository;
-import org.bouncycastle.x509.NoSuchStoreException;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
