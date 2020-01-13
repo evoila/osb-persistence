@@ -5,6 +5,8 @@ import de.evoila.cf.broker.persistence.mongodb.repository.MongoDBJobProgressRepo
 import de.evoila.cf.broker.repository.JobRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.NoSuchElementException;
+
 /**
  * @author Patrick Weber, Johannes Hiemer.
  */
@@ -29,7 +31,7 @@ public class JobRepositoryImpl implements JobRepository {
 
 	@Override
 	public JobProgress saveJobProgress(String id, String referenceId, String progress, String description, String operation) {
-		JobProgress jobProgress = new JobProgress(id, referenceId, progress, description, operation);
+        JobProgress jobProgress = new JobProgress(id, referenceId, progress, description, operation);
         jobProgressRepository.save(jobProgress);
 
         return jobProgress;
@@ -37,7 +39,7 @@ public class JobRepositoryImpl implements JobRepository {
 
 	@Override
 	public JobProgress updateJobProgress(String id, String progress, String description) {
-		JobProgress jobProgress = jobProgressRepository.findById(id).get();
+		JobProgress jobProgress = jobProgressRepository.findById(id).orElseThrow(NoSuchElementException::new);
 		jobProgress.setState(progress);
 		jobProgress.setDescription(description);
 		jobProgressRepository.save(jobProgress);
