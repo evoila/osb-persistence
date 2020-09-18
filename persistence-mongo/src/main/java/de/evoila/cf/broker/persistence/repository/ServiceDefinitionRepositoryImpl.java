@@ -1,8 +1,9 @@
 package de.evoila.cf.broker.persistence.repository;
 
 import de.evoila.cf.broker.exception.ServiceDefinitionDoesNotExistException;
-import de.evoila.cf.broker.model.catalog.plan.Plan;
+import de.evoila.cf.broker.exception.ServiceDefinitionPlanDoesNotExistException;
 import de.evoila.cf.broker.model.catalog.ServiceDefinition;
+import de.evoila.cf.broker.model.catalog.plan.Plan;
 import de.evoila.cf.broker.repository.ServiceDefinitionRepository;
 import de.evoila.cf.broker.service.CatalogService;
 import org.springframework.stereotype.Repository;
@@ -21,32 +22,28 @@ public class ServiceDefinitionRepositoryImpl implements ServiceDefinitionReposit
 	    this.catalogService = catalogService;
 	}
 
-	@Override
-	public List<ServiceDefinition> getServiceDefinition() {
-		return catalogService.getCatalog().getServices();
-	}
+    @Override
+    public List<ServiceDefinition> getServiceDefinitions() {
+        return catalogService.getCatalog().getServices();
+    }
 
-	@Override
-	public void validateServiceId(String serviceDefinitionId) throws ServiceDefinitionDoesNotExistException {
-		for(ServiceDefinition serviceDefinition : catalogService.getCatalog().getServices()) {
-			if (serviceDefinitionId.equals(serviceDefinition.getId())) {
-				return;
-			}
-		}
+    @Override
+    public ServiceDefinition getServiceDefinition(String serviceId) throws ServiceDefinitionDoesNotExistException {
+        return getServiceDefinitions().stream()
+                .filter(serviceDefinition -> serviceId.equals(serviceDefinition.getId()))
+                .findFirst().orElseThrow(() -> new ServiceDefinitionDoesNotExistException(serviceId));
+    }
 
-		throw new ServiceDefinitionDoesNotExistException(serviceDefinitionId);
-	}
+    @Override
+    public void validateServiceId(String serviceDefinitionId) throws ServiceDefinitionDoesNotExistException {
+        getServiceDefinition(serviceDefinitionId);
+    }
 
-	@Override
-	public Plan getPlan(String planId) throws ServiceDefinitionDoesNotExistException {
-		for(ServiceDefinition serviceDefinition : catalogService.getCatalog().getServices()) {
-			for (Plan currentPlan : serviceDefinition.getPlans()) {
-				if (currentPlan.getId().equals(planId)) {
-					return currentPlan;
-				}
-			}
-		}
-		throw new ServiceDefinitionDoesNotExistException("Missing plan for id: " + planId);
-	}
+    @Override
+    public Plan getPlan(String serviceId, String planId) throws ServiceDefinitionDoesNotExistException, ServiceDefinitionPlanDoesNotExistException {
+        return getServiceDefinition(serviceId).getPlans().stream()
+                .filter(plan -> planId.equals(plan.getId()))
+                .findFirst().orElseThrow(() -> new ServiceDefinitionPlanDoesNotExistException(serviceId, planId));
+    }
 
 }
