@@ -18,6 +18,7 @@
 
     <modules>
         <module>persistence-mongo</module>
+        <module>persistence-kafka</module>
     </modules>
 
     <properties>
