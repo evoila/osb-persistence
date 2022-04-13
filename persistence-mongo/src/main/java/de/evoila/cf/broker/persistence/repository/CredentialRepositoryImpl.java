@@ -33,6 +33,11 @@ public class CredentialRepositoryImpl implements CredentialRepository {
     }
 
     @Override
+    public void deleteByIdContains(String identifier) {
+        this.mongoDBCredentialRepository.deleteById(identifier);
+    }
+
+    @Override
     public void delete(Credential credential) {
         this.mongoDBCredentialRepository.delete(credential);
     }
